@@ -35,20 +35,21 @@ function registerMixinOnObject(mixinName, instance) {
 /**
  * Applies a mixin to an object
  * @param  {object} instance the object to apply to
- * @param  {object} mixin    the mixin to apply
+ * @param  {object} mixin    the mixin(s) to apply
  * @return {object}          the mixed object result
  */
-function mix(instance, mixin) {
-    var res;
+function mix(instance/*, ...mixins*/) {
+    var args = Array.prototype.slice.apply(arguments);
+    args.shift(); // now we just have the mixins
 
-    if(!doesInherit(instance, mixin.name)) {
-        res = assign(instance, mixin.prototype);
-        registerMixinOnObject(mixin.name, instance);
-    } else {
-        res = instance;
-    }
+    args.forEach(function(mixin) {
+        if(!doesInherit(instance, mixin.name)) {
+            assign(instance, mixin.prototype);
+            registerMixinOnObject(mixin.name, instance);
+        }
+    });
 
-    return res;
+    return instance;
 }
 
 /**
