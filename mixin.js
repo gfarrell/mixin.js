@@ -41,7 +41,7 @@ function registerMixinOnObject(mixinName, instance) {
 function mix(instance, mixin) {
     var res;
 
-    if(!doesInherit(instance, mixin)) {
+    if(!doesInherit(instance, mixin.name)) {
         res = assign(instance, mixin.prototype);
         registerMixinOnObject(mixin.name, instance);
     } else {
