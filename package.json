@@ -1,6 +1,6 @@
 {
   "name": "mixin",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "simple mixins library for javascript",
   "main": "mixin.js",
   "scripts": {
